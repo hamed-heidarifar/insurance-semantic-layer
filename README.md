@@ -311,3 +311,5 @@ erDiagram
         decimal transaction_amount
         string transaction_status
     }
+
+    ![alt text](mermaid-diagram.png)
