@@ -263,8 +263,9 @@ The project separates raw-data cleanup, dimensional modeling, and business logic
 
 This makes the transformations easier to understand, test, maintain, and extend.
 
-The star schema provides clear dimensions and facts, while the business-facing `insurance_metrics` model provides consistent definitions for common insurance analytics.
+## Star Schema Diagram
 
+```mermaid
 erDiagram
     DIM_CUSTOMERS ||--o{ DIM_POLICIES : "has"
     DIM_CUSTOMERS ||--o{ FACT_CLAIMS : "has"
@@ -299,7 +300,7 @@ erDiagram
         string claim_category
         decimal claim_amount
         decimal settlement_amount
-        decimal days_to_settlement
+        int days_to_settlement
     }
 
     FACT_TRANSACTIONS {
@@ -311,5 +312,4 @@ erDiagram
         decimal transaction_amount
         string transaction_status
     }
-
-    ![alt text](mermaid-diagram.png)
+```
