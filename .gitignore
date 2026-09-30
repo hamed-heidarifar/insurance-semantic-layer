@@ -1,0 +1,24 @@
+
+target/
+dbt_packages/
+logs/
+.env
+# dbt generated files
+target/
+logs/
+dbt_packages/
+
+# Local DuckDB database
+*.duckdb
+*.duckdb.wal
+
+# Python
+__pycache__/
+*.pyc
+
+# Environment files
+.env
+
+# OS / editor files
+.DS_Store
+.vscode/

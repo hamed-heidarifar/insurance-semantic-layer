@@ -1,0 +1,135 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: "Cleaned customer data from the raw customer seed."
+
+    columns:
+      - name: customer_id
+        description: "Unique identifier for each customer."
+        data_tests:
+          - unique
+          - not_null
+
+      - name: customer_name
+        description: "Customer full name."
+
+      - name: state
+        description: "Customer state."
+
+      - name: age
+        description: "Customer age."
+
+      - name: customer_segment
+        description: "Business segment assigned to the customer."
+
+  - name: stg_policies
+    description: "Cleaned insurance policy data from the raw policy seed."
+
+    columns:
+      - name: policy_id
+        description: "Unique identifier for each insurance policy."
+        data_tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+        description: "Customer who owns the policy."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_customers')
+                field: customer_id
+
+      - name: policy_number
+        description: "Business policy number."
+
+      - name: policy_type
+        description: "Type of insurance policy."
+
+      - name: coverage_amount
+        description: "Policy coverage amount."
+
+      - name: annual_premium
+        description: "Annual premium amount for the policy."
+
+      - name: policy_start_date
+        description: "Date the policy started."
+
+      - name: policy_status
+        description: "Current status of the policy."
+        
+  - name: stg_claims
+    description: "Cleaned insurance claims data from the raw claims seed."
+
+    columns:
+      - name: claim_id
+        description: "Unique identifier for each claim."
+        data_tests:
+          - unique
+          - not_null
+
+      - name: policy_id
+        description: "Policy associated with the claim."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_policies')
+                field: policy_id
+
+      - name: claim_number
+        description: "Business claim number."
+
+      - name: claim_date
+        description: "Date the claim was filed."
+
+      - name: claim_category
+        description: "Category of the claim."
+
+      - name: claim_amount
+        description: "Amount originally claimed."
+
+      - name: claim_status
+        description: "Current status of the claim."
+
+      - name: settlement_date
+        description: "Date the claim was settled, when applicable."
+
+      - name: settlement_amount
+        description: "Amount paid to settle the claim, when applicable."
+
+      - name: days_to_settlement
+        description: "Number of days between claim and settlement."
+
+  - name: stg_transactions
+    description: "Cleaned insurance transaction data from the raw transaction seed."
+
+    columns:
+      - name: transaction_id
+        description: "Unique identifier for each transaction."
+        data_tests:
+          - unique
+          - not_null
+
+      - name: policy_id
+        description: "Policy associated with the transaction."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_policies')
+                field: policy_id
+
+      - name: transaction_date
+        description: "Date of the transaction."
+
+      - name: transaction_type
+        description: "Type of transaction."
+
+      - name: transaction_amount
+        description: "Monetary amount of the transaction."
+
+      - name: transaction_status
+        description: "Status of the transaction."

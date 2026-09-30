@@ -1,0 +1,56 @@
+version: 2
+
+models:
+  - name: insurance_metrics
+    description: >
+      Business-facing semantic model for insurance analytics.
+      The model has one row per policy and combines policy attributes
+      with aggregated claims and premium information.
+
+    columns:
+      - name: policy_id
+        description: "Unique identifier for a policy."
+        data_tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+        description: "Unique identifier for the customer who owns the policy."
+
+      - name: policy_number
+        description: "Business policy number."
+
+      - name: policy_type
+        description: "Type of insurance policy, such as Auto, Home, or Life."
+
+      - name: policy_status
+        description: "Current status of the policy, such as Active or Lapsed."
+
+      - name: coverage_amount
+        description: "Coverage amount of the policy."
+
+      - name: annual_premium
+        description: "Annual premium recorded on the policy."
+
+      - name: claim_count
+        description: "Number of claims associated with the policy."
+
+      - name: total_claim_amount
+        description: "Total amount claimed for the policy."
+
+      - name: total_settlement_amount
+        description: "Total amount paid to settle claims for the policy."
+
+      - name: total_premium
+        description: >
+          Total completed premium payment transactions associated
+          with the policy.
+
+      - name: avg_settlement_days
+        description: >
+          Average settlement time for claims associated with the policy.
+
+      - name: loss_ratio
+        description: >
+          Policy-level loss ratio calculated as total settlement amount
+          divided by total completed premium payments.
